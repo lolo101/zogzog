@@ -6,9 +6,18 @@ import org.springframework.stereotype.Service;
 @Service
 class StdOutNotifService implements NotifService {
 
-	@Override
+	private final Object lock = new Object();
+
 	@Async
+	@Override
 	public void notifyCanceled(Toto toto) {
+		synchronized(lock) {
+			try {
+				lock.wait(5000);
+			} catch (InterruptedException ex) {
+				System.out.println("Interrupted ! " + ex);
+			}
+		}
 		System.out.println(String.format("Zogzogs %s have been deleted", toto.getZogzogs()));
 	}
 }
