@@ -13,7 +13,7 @@ class StdOutNotifService implements NotifService {
 	public void notifyCanceled(Toto toto) {
 		synchronized(lock) {
 			try {
-				lock.wait(5000);
+				lock.wait(1000);
 			} catch (InterruptedException ex) {
 				System.out.println("Interrupted ! " + ex);
 			}
